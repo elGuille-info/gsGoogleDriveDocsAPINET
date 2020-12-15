@@ -11,7 +11,7 @@ Biblioteca creada con .NET Standard 2.0 para compatibilidad con .NET Framework y
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>es-ES</NeutralLanguage>
     <PackageProjectUrl>http://www.elguillemola.com/2020/12/te-gustaria-obtener-mas-prestaciones-de-gsnotasnet/</PackageProjectUrl>
-    <Version>1.0.0.2</Version>
+    <Version>1.0.0.5</Version>
   </PropertyGroup>
 
     <PropertyGroup>
@@ -19,13 +19,19 @@ Biblioteca creada con .NET Standard 2.0 para compatibilidad con .NET Framework y
         <RepositoryUrl>https://github.com/elGuille-info/gsGoogleDriveDocsAPINET</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>net-standar dotnet dot-net c# google-apis google-docs-api google-drive-api</PackageTags>
-        <PackageReleaseNotes>v1.0.0.2 (15-dic-2020) Cambio a public algunos de los métodos. El que hay que usar es: GuardarNotasDrive.
+        <PackageReleaseNotes>v1.0.0.5 (15-dic-2020) Creo tres eventos para indicar el proceso de guardar documentos y cuando inicia y finaliza.
+v1.0.0.4 (15-dic-2020) Copio las DLL de las APIs de Google a la carpeta bin\...\netstandard2.0
+v1.0.0.3 (15-dic-2020) Da error al cargar las APIs de Google. Añado referencias a Google.Apis, Google.Apis.Auth y Google.Apis.Core
+v1.0.0.2 (15-dic-2020) Cambio a public algunos de los métodos. El que hay que usar es: GuardarNotasDrive.
 v1.0.0.1 (15-dic-2020) Creo el paquete de NuGet y el repositorio de GitHub.
 v1.0.0.0 (15-dic-2020) Primera compilación</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-    <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2167" />
+    <PackageReference Include="Google.Apis" Version="1.49.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.49.0" />
+    <PackageReference Include="Google.Apis.Core" Version="1.49.0" />
+    <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2170" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.49.0.2166" />
   </ItemGroup>
 

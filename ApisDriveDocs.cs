@@ -5,7 +5,7 @@
 // Utiliza las credenciales de correos.elguille.info@gmail.com
 //
 // Instalo paquete de Google Docs API:
-// Install-Package Google.Apis.Docs.v1
+// Install-Package Google.Apis.Docs.v1 -Version 1.49.0.2170
 // Install-Package Google.Apis.Drive.v3 -Version 1.49.0.2166
 //
 // (c) Guillermo (elGuille) Som, 2020
@@ -27,6 +27,17 @@ using System.Text;
 
 namespace gsGoogleDriveDocsAPINET
 {
+    /// <summary>
+    /// Delegado para enviar mensajes de esta clase.
+    /// </summary>
+    /// <param name="mensaje">El texto a devolver en el evento.</param>
+    public delegate void MensajeDelegate(string mensaje);
+
+    /// <summary>
+    /// Delegado para avisar de que se inicia o finaliza la operación de guardar documentos.
+    /// </summary>
+    public delegate void AvisoGuardarNotasDelegate();
+
     public class ApisDriveDocs
     {
         // If modifying these scopes, delete your previously saved credentials
@@ -35,6 +46,7 @@ namespace gsGoogleDriveDocsAPINET
         static string[] Scopes = { DocsService.Scope.Documents, DocsService.Scope.DriveFile };
         static string ApplicationName = "gsNotasNET - Google API";
 
+        // Credenciales del proyecto de correos.elguille.info@gmail.com
         static ClientSecrets secrets = new ClientSecrets()
         {
             ClientId = "497045764341-cromici7c1mpisc9ffcjt2buv9olfcq3.apps.googleusercontent.com",
@@ -45,6 +57,36 @@ namespace gsGoogleDriveDocsAPINET
         static DriveService driveService;
 
         /// <summary>
+        /// Este evento avisará cuando se hayan guardado las notas/documentos en Google Drive.
+        /// </summary>
+        public static event AvisoGuardarNotasDelegate FinalizadoGuardarNotasEnDrive;
+
+        protected static void OnFinalizadoGuardarNotasEnDrive()
+        {
+            FinalizadoGuardarNotasEnDrive?.Invoke();
+        }
+
+        /// <summary>
+        /// Este evento se producirá cuando se inicie la creación de documentos en Google Drive.
+        /// </summary>
+        public static event AvisoGuardarNotasDelegate IniciadoGuardarNotasEnDrive;
+
+        protected static void OnIniciadoGuardarNotasEnDrive()
+        {
+            IniciadoGuardarNotasEnDrive?.Invoke();
+        }
+
+        /// <summary>
+        /// Evento para avisar de los documentos que se van guardando.
+        /// </summary>
+        public static event MensajeDelegate GuardandoNotas;
+        
+        protected static void OnGuardandoNotas(string mensaje)
+        {
+            GuardandoNotas?.Invoke(mensaje);
+        }
+
+        /// <summary>
         /// Guarda el contenido del fichero de notas de gsNotasNET en Drive como documentos.
         /// </summary>
         /// <param name="ficNotas">El path de las notas usadas por la aplicación.</param>
@@ -53,6 +95,8 @@ namespace gsGoogleDriveDocsAPINET
         /// <remarks>Si se indica SI, los documentos se eliminarán permanentemente (no van a la papelera).</remarks>
         public static int GuardarNotasDrive(string ficNotas, string borrarAnt = "NO")
         {
+            OnIniciadoGuardarNotasEnDrive();
+
             FicNotas = ficNotas;
 
             UserCredential credential;
@@ -95,20 +139,20 @@ namespace gsGoogleDriveDocsAPINET
                 if (string.IsNullOrEmpty(subFolderId))
                 {
                     subFolderId = CrearSubFolder(folderId, folderNotas);
-                    //Console.WriteLine($"Se ha creado la subcarpeta con el ID: {subFolderId}");
+                    OnGuardandoNotas($"Se ha creado la subcarpeta con el ID: {subFolderId}");
                 }
-                //else
-                //    Console.WriteLine($"Ya existe la subcarpeta {folderNotas}, tiene el ID: {subFolderId}");
+                else
+                    OnGuardandoNotas($"Ya existe la subcarpeta {folderNotas}, tiene el ID: {subFolderId}");
                 //Console.WriteLine();
                 if (borrarAnt == "SI")
                 {
-                    //Console.WriteLine($"Borrando los documentos de la carpeta '{folderNotas}'...");
+                    OnGuardandoNotas($"Borrando los documentos de la carpeta '{folderNotas}'...");
                     //Console.WriteLine();
                     var docBorrados = EliminarDocumentos(folderNotas);
-                    //Console.WriteLine($"Se han eliminado {docBorrados} de '{folderNotas}'.");
+                    OnGuardandoNotas($"Se han eliminado {docBorrados} de '{folderNotas}'.");
                     //Console.WriteLine();
                 }
-                //Console.WriteLine($"Guardando {colNotas[folderNotas].Count} notas en '{nombreFolderPred}\\{folderNotas}'...");
+                OnGuardandoNotas($"Guardando {colNotas[folderNotas].Count} notas en '{nombreFolderPred}\\{folderNotas}'...");
                 var t = 0;
                 foreach (var nota in colNotas[folderNotas])
                 {
@@ -160,9 +204,11 @@ namespace gsGoogleDriveDocsAPINET
                     body.Requests = requests;
                     var response = docService.Documents.BatchUpdate(body, gDoc.DocumentId).Execute();
 
-                    //Console.WriteLine($"Documento creado con el ID: {response.DocumentId}");
+                    OnGuardandoNotas($"Documento creado con el ID: {response.DocumentId}");
                 }
             }
+            OnGuardandoNotas($"Se han guardado {total} notas/documentos en Google Drive.");
+            OnFinalizadoGuardarNotasEnDrive();
             return total;
         }
 
