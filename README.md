@@ -13,13 +13,12 @@ Las notas **siempre** se guardan en el fichero de texto de la aplicación (ubica
 
 ## Revisiones<br>
 <br>
-
-v1.0.0.5 (15-dic-2020) Creo tres eventos para indicar el proceso de guardar documentos y cuando inicia y finaliza.
-v1.0.0.4 (15-dic-2020) Copio las DLL de las APIs de Google a la carpeta bin\...\netstandard2.0
-v1.0.0.3 (15-dic-2020) Da error al cargar las APIs de Google. Añado referencias a Google.Apis, Google.Apis.Auth y Google.Apis.Core
-v1.0.0.2 (15-dic-2020) Cambio a public algunos de los métodos. El que hay que usar es: GuardarNotasDrive.
-v1.0.0.1 (15-dic-2020) Creo el paquete de NuGet y el repositorio de GitHub.
-v1.0.0.0 (15-dic-2020) Primera compilación
+v1.0.0.5 (15-dic-2020) Creo tres eventos para indicar el proceso de guardar documentos y cuando inicia y finaliza.<br>
+v1.0.0.4 (15-dic-2020) Copio las DLL de las APIs de Google a la carpeta bin\...\netstandard2.0<br>
+v1.0.0.3 (15-dic-2020) Da error al cargar las APIs de Google. Añado referencias a Google.Apis, Google.Apis.Auth y Google.Apis.Core<br>
+v1.0.0.2 (15-dic-2020) Cambio a public algunos de los métodos. El que hay que usar es: GuardarNotasDrive.<br>
+v1.0.0.1 (15-dic-2020) Creo el paquete de NuGet y el repositorio de GitHub.<br>
+v1.0.0.0 (15-dic-2020) Primera compilación<br>
 <br>
 
 ### gsGoogleDriveDocsAPINET v1.0.0.2<br>
