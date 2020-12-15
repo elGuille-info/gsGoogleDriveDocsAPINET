@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Guillermo Som (elGuille)</Authors>
+    <Company>elGuille</Company>
+    <Description>Lee el contenido del fichero de notas de gsNotasNETF (.NET Framework 4.8) y guarda cada nota como un documento en Drive. Las notas (documentos) de cada grupo se guardará en una carpeta independiente.
+
+Biblioteca creada con .NET Standard 2.0 para compatibilidad con .NET Framework y .NET (Core)  (revisado el 15-dic-2020)</Description>
+    <Copyright>(c) Guillermo Som (elGuille), 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NeutralLanguage>es-ES</NeutralLanguage>
+    <PackageProjectUrl>http://www.elguillemola.com/2020/12/te-gustaria-obtener-mas-prestaciones-de-gsnotasnet/</PackageProjectUrl>
+    <Version>1.0.0.2</Version>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <RepositoryUrl>https://github.com/elGuille-info/gsGoogleDriveDocsAPINET</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>net-standar dotnet dot-net c# google-apis google-docs-api google-drive-api</PackageTags>
+        <PackageReleaseNotes>v1.0.0.2 (15-dic-2020) Cambio a public algunos de los métodos. El que hay que usar es: GuardarNotasDrive.
+v1.0.0.1 (15-dic-2020) Creo el paquete de NuGet y el repositorio de GitHub.
+v1.0.0.0 (15-dic-2020) Primera compilación</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+    <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2167" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.49.0.2166" />
+  </ItemGroup>
+
+</Project>
