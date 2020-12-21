@@ -27,12 +27,17 @@ v1.0.0.1 (15-dic-2020) Creo el paquete de NuGet y el repositorio de GitHub.
 v1.0.0.0 (15-dic-2020) Primera compilación</PackageReleaseNotes>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DefineConstants>TRACE;ESDLL</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
     <PackageReference Include="Google.Apis" Version="1.49.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.49.0" />
     <PackageReference Include="Google.Apis.Core" Version="1.49.0" />
     <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2170" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.49.0.2166" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

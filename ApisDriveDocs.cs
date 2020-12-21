@@ -12,10 +12,10 @@
 //-----------------------------------------------------------------------------
 
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Docs.v1;
-using Google.Apis.Docs.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Google.Apis.Docs.v1;
+using Google.Apis.Docs.v1.Data;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data; // Para el tipo File
 
@@ -445,8 +445,9 @@ namespace gsGoogleDriveDocsAPINET
         }
     }
 }
-
+#if ESDLL
 namespace System.Runtime.CompilerServices
 {
     public class IsExternalInit { }
 }
+#endif
